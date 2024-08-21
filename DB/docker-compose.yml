@@ -1,0 +1,25 @@
+version: "3.8"
+
+services:
+  postgres:
+    build:
+      context: postgres/
+      dockerfile: Dockerfile
+    container_name: postgres
+    environment:
+      POSTGRES_USER: jtoulous
+      POSTGRES_PASSWORD: mysecretpassword
+      POSTGRES_DB: piscineds
+    ports:
+      - "5432:5432"
+
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: tamere@lapute.fr
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - "8080:80"
+    depends_on:
+      - postgres
